@@ -100,4 +100,4 @@ theme: pure
 deploy:
   type: git
   repo: git@github.com-phucquoc-ng:phucquoc-ng/phucquoc-ng.github.io.git
-  branch: master
+  branch: gh-pages
