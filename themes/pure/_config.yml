@@ -31,7 +31,7 @@ site:
     width: 40
     height: 40
     url: ../images/logo.png
-  title: Blog's Quoc Ng
+  title: Blog's Quoc Ng (Ninja)
   favicon: /favicon.png
   board: <p>Have patience. All things are difficult before they become easy!</p>
   copyright: true
@@ -83,14 +83,6 @@ search:
 # Donate
 donate:
   enable: false
-  # 微信打赏
-  wechatpay:
-    qrcode: images/donate/wechatpayimg.png
-    title: 微信支付
-  # 支付宝打赏
-  alipay: 
-    qrcode: images/donate/alipayimg.png 
-    title: 支付宝
 
 # Share
 # weibo,qq,qzone,wechat,tencent,douban,diandian,facebook,twitter,google,linkedin
@@ -101,7 +93,7 @@ share:
 
 # Github
 github: 
-  username: quocdev  # github username
+  username: phucquoc-ng  # github username
 
 # Comment
 # Gitment
@@ -190,11 +182,11 @@ profile:
   author_title: Mobile Developer & DevOps
   author_description: 
   location: DaNang, VietNam
-  follow: https://github.com/quoc-dev
+  follow: https://github.com/phucquoc-ng
   # Social Links
   social:
     links:
-      github: https://github.com/quoc-dev
+      github: https://github.com/phucquoc-ng
       twitter: https://twitter.com/quocdev
       facebook: https://www.facebook.com/quocdev
       # dribbble: /
@@ -210,8 +202,8 @@ profile:
     ThinkJava: ★★★☆☆
   # My Personal Links
   links:
-    Github: https://github.com/quoc-dev
-    Blog: https://quoc-dev.github.io
+    Github: https://github.com/phucquoc-ng
+    Blog: https://phucquoc-ng.github.io/
   # My Personal Labels
   labels:
     - Java
