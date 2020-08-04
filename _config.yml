@@ -100,3 +100,4 @@ theme: pure
 deploy:
   type: git
   repo: https://github.com/phucquoc-ng/phucquoc-ng.github.io.git
+  branch: master
