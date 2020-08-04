@@ -99,5 +99,5 @@ theme: pure
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/phucquoc-ng/phucquoc-ng.github.io.git
+  repo: git@github.com:phucquoc-ng/phucquoc-ng.github.io.git
   branch: master
