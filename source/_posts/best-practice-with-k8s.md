@@ -6,5 +6,3 @@ tags: ['K8s','microservices']
 ---
 
 1. [Demo + Tìm hiểu về K8s](https://rinormaloku.com/introduction-application-architecture/)
-
-
