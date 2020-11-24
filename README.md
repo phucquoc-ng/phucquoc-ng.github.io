@@ -1,4 +1,4 @@
-# [My blog](phucquoc-ng.github.io)
+# [My blog](https://phucquoc-ng.github.io/)
 
 #### Tạo New post => `hexo new post "name_of_post"`
 
