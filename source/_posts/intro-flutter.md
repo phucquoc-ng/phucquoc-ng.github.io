@@ -2,7 +2,7 @@
 layout: post
 title: Giới thiệu về Flutter
 date: 2020-10-12 14:46:13
-tags:['flutter', 'dart']
+tags: ['flutter', 'dart']
 ---
 
 **Flutter** được phát triển nhằm giải quyết bài toán thường gặp trong mobile là **Fast Development** và **Native Performance**. Nếu như React Native chỉ đảm bảo **FD** và code native thuần chỉ đảm bảo **NP** thì **Flutter** làm được cả 2 điều trên. Magic !!! hay **hư cấu** 
