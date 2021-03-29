@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang=vi>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>Container là gì? | Blog&#39;s Quoc Ng (Ninja)</title>
+  <meta name="description" content="Container là gì? Thuật ngữ containerContainer:Trong Linux, container là công nghệ ảo hóa hệ điều hành được dùng để gộp applications và các phụ thuộc thành một gói và chạy chúng trong môi trường cô lập">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Container là gì?">
+<meta property="og:url" content="https://phucquoc-ng.github.io/2020/07/10/what-is-container/index.html">
+<meta property="og:site_name" content="Blog&#39;s Quoc Ng">
+<meta property="og:description" content="Container là gì? Thuật ngữ containerContainer:Trong Linux, container là công nghệ ảo hóa hệ điều hành được dùng để gộp applications và các phụ thuộc thành một gói và chạy chúng trong môi trường cô lập">
+<meta property="og:locale" content="vi_VN">
+<meta property="article:published_time" content="2020-07-10T03:00:15.000Z">
+<meta property="article:modified_time" content="2021-03-27T02:36:05.781Z">
+<meta property="article:author" content="Nguyen Phuc Quoc">
+<meta property="article:tag" content="docker">
+<meta property="article:tag" content="container">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://phucquoc-ng.github.io/2020/07/10/what-is-container/index.html">
+  
+    <link rel="alternate" href="atom.xml" title="Blog&#39;s Quoc Ng" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="../../../../css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/phucquoc-ng" target="_blank">
+          <img class="img-circle img-rotate" src="../../../../images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Nguyen Phuc Quoc</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Mobile Developer &amp; DevOps</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> DaNang, VietNam</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="../../../../.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="../../../../archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="../../../../tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="../../../../about">
+            
+            <i class="icon icon-profile"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="../../../../https:/github.com/phucquoc-ng" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="../../../../https:/twitter.com/quocdev" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="../../../../https:/www.facebook.com/quocdev" target="_blank" title="Facebook" data-toggle=tooltip data-placement=top><i class="icon icon-facebook"></i></a></li>
+        
+        <li><a href="../../../../atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>Have patience. All things are difficult before they become easy!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Extensions/" rel="tag">Extensions</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/Flutter/" rel="tag">Flutter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/K8s/" rel="tag">K8s</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/container/" rel="tag">container</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/dart/" rel="tag">dart</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/docker/" rel="tag">docker</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/flutter/" rel="tag">flutter</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/kubernetes/" rel="tag">kubernetes</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/microservices/" rel="tag">microservices</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/ngam/" rel="tag">ngam</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/review-course/" rel="tag">review course</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/roadmap/" rel="tag">roadmap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/su-nghiep/" rel="tag">su-nghiep</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/thinking/" rel="tag">thinking</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="../../../../tags/Extensions/" style="font-size: 13px;">Extensions</a> <a href="../../../../tags/Flutter/" style="font-size: 13px;">Flutter</a> <a href="../../../../tags/K8s/" style="font-size: 13px;">K8s</a> <a href="../../../../tags/container/" style="font-size: 13px;">container</a> <a href="../../../../tags/dart/" style="font-size: 13.67px;">dart</a> <a href="../../../../tags/docker/" style="font-size: 13.67px;">docker</a> <a href="../../../../tags/flutter/" style="font-size: 14px;">flutter</a> <a href="../../../../tags/kubernetes/" style="font-size: 13.33px;">kubernetes</a> <a href="../../../../tags/microservices/" style="font-size: 13px;">microservices</a> <a href="../../../../tags/ngam/" style="font-size: 13px;">ngam</a> <a href="../../../../tags/review-course/" style="font-size: 13px;">review course</a> <a href="../../../../tags/roadmap/" style="font-size: 13px;">roadmap</a> <a href="../../../../tags/su-nghiep/" style="font-size: 13px;">su-nghiep</a> <a href="../../../../tags/thinking/" style="font-size: 13px;">thinking</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2021/03/">tháng 3 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2020/11/">tháng 11 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2020/10/">tháng 10 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2020/09/">tháng 9 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2020/07/">tháng 7 2020</a><span class="archive-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="../../../../2021/03/29/flutter-isolate-la-gi/" class="title">Flutter Isolate giải quyết được gì?</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-03-29T04:58:08.000Z" itemprop="datePublished">2021-03-29</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="../../../../2021/03/29/basic-dart/" class="title">Zero to Hero Dart</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-03-29T03:57:04.000Z" itemprop="datePublished">2021-03-29</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="../../../11/24/ngam-su-nghiep/" class="title">Ngẫm - Sự Nghiệp</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-11-24T04:07:44.000Z" itemprop="datePublished">2020-11-24</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="../../../11/02/extensions-vs-code-for-flutter/" class="title">Extensions VSCode for Flutter</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-11-02T02:43:02.000Z" itemprop="datePublished">2020-11-02</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="../../../10/12/intro-flutter/" class="title">Giới thiệu về Flutter</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-10-12T07:46:13.000Z" itemprop="datePublished">2020-10-12</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-what-is-container" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Container là gì?
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="" class="article-date">
+	  <time datetime="2020-07-10T03:00:15.000Z" itemprop="datePublished">2020-07-10</time>
+	</a>
+</span>
+        
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="../../../../tags/container/" rel="tag">container</a>, <a class="article-tag-link-link" href="../../../../tags/docker/" rel="tag">docker</a>
+  </span>
+
+
+        
+
+	<span class="article-read hidden-xs">
+    	<i class="icon icon-eye-fill" aria-hidden="true"></i>
+    	<span id="" class="leancloud_visitors"  data-flag-title="Container là gì?">0</span>
+    </span>
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="#comments" class="article-comment-link">Comments</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 695(words)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 4(minutes)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://blogd.net/docker/container-la-gi/">Container là gì?</a></p>
+<h2 id="Thuat-ngu-container"><a href="#Thuat-ngu-container" class="headerlink" title="Thuật ngữ container"></a>Thuật ngữ container</h2><h4 id="Container"><a href="#Container" class="headerlink" title="Container:"></a>Container:</h4><p>Trong Linux, container là công nghệ ảo hóa hệ điều hành được dùng để gộp applications và các phụ thuộc thành một gói và chạy chúng trong môi trường cô lập. </p>
+<h4 id="Container-Image"><a href="#Container-Image" class="headerlink" title="Container Image:"></a>Container Image:</h4><p>Container images là tệp tĩnh xác định hệ thống tệp và hành vi của các cấu hình container cụ thể. Container images được dùng làm mẫu để tạo containers.</p>
+<h4 id="Container-Orchestration"><a href="#Container-Orchestration" class="headerlink" title="Container Orchestration:"></a>Container Orchestration:</h4><p>Orchestration là thuật ngữ được sử dụng để mô tả các quy trình và công cụ cần thiết để quản lý lượng lớn container trên nhiều máy chủ. Container orchestration thường kiểm soát tỷ lệ, khả năng chịu lỗi, phân bổ tài nguyên và lập lịch sử dụng nền tảng container. </p>
+<h4 id="Container-Runtime"><a href="#Container-Runtime" class="headerlink" title="Container Runtime:"></a>Container Runtime:</h4><p><strong>Container runtime</strong> là thành phần thực sự chạy và quản lý container trên máy chủ. Yêu cầu tối thiểu thường là cung cấp container từ một image nhất định, nhưng nhiều runtimes gộp các chức năng khác như quản lý quy trình, giám sát và quản lý image. Docker bao gồm container runtime trong lệnh docker[/B] của nó, nhưng có nhiều lựa chọn thay thế khác có sẵn cho các trường hợp sử dụng khác nhau. </p>
+<h4 id="Linux-cgroups"><a href="#Linux-cgroups" class="headerlink" title="Linux cgroups:"></a>Linux cgroups:</h4><p><strong>Linux cgroups</strong>, hoặc các nhóm kiểm soát, là tính năng kernel kết hợp các quy trình lại với nhau và xác định quyền truy cập của chúng vào tài nguyên.Container trong Linux được triển khai bằng cgroups để quản lý tài nguyên và các quy trình riêng biệt.</p>
+<h4 id="Linux-namespaces"><a href="#Linux-namespaces" class="headerlink" title="Linux namespaces:"></a>Linux namespaces:</h4><p><strong>Linux namespaces</strong> là tính năng kernel được thiết kế để giới hạn khả năng hiển thị cho một quá trình hoặc cgroup đối với phần còn lại của hệ thống. container trong Linux sử dụng namespaces để giúp cô lập workloads và tài nguyên của chúng khỏi các tiến trình khác đang chạy trên hệ thống.</p>
+<h4 id="LXC"><a href="#LXC" class="headerlink" title="LXC:"></a>LXC:</h4><p>LXC là hình thức container hóa Linux có trước Docker và nhiều công nghệ khác trong khi dựa vào nhiều công nghệ kernel tương tự. So với Docker, LXC thường ảo hóa toàn bộ hệ điều hành thay vì chỉ các quy trình cần thiết để chạy application, và có vẻ giống với máy ảo hơn.</p>
+<h4 id="Virtual-Machines-May-ao"><a href="#Virtual-Machines-May-ao" class="headerlink" title="Virtual Machines (Máy ảo):"></a>Virtual Machines (Máy ảo):</h4><p>Máy ảo hay VM là công nghệ ảo hóa hardware mô phỏng toàn bộ máy tính. Một hệ điều hành đầy đủ được cài đặt trong máy ảo để quản lý các thành phần bên trong và truy cập tài nguyên computing của máy ảo.</p>
+<h4 id="Virtualization-Ao-hoa"><a href="#Virtualization-Ao-hoa" class="headerlink" title="Virtualization (Ảo hóa):"></a>Virtualization (Ảo hóa):</h4><p> Ảo hóa là quá trình tạo, chạy và quản lý môi trường ảo hoặc tài nguyên máy tính. Ảo hóa là cách trừu tượng hóa tài nguyên vật lý và thường được dùng để phân đoạn một nhóm tài nguyên cho các mục đích khác nhau.</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <!-- <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://phucquoc-ng.github.io/2020/07/10/what-is-container/" title="Container là gì?" target="_blank" rel="external">https://phucquoc-ng.github.io/2020/07/10/what-is-container/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/phucquoc-ng" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="../../../../images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/phucquoc-ng" target="_blank"><span class="text-dark">Nguyen Phuc Quoc</span><small class="ml-1x">Mobile Developer &amp; DevOps</small></a></h3>
+        <div></div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+ -->
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="../../21/best-practice-with-k8s/" title="Những bài viết thực hành hay nhất về K8s"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="../../09/resolve-problem-with-kubernetes/" title="Kubernetes giải quyết được vấn đề gì?"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  <!-- 
+ -->
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="../../../../https:/github.com/phucquoc-ng" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="../../../../https:/twitter.com/quocdev" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="../../../../https:/www.facebook.com/quocdev" target="_blank" title="Facebook" data-toggle=tooltip data-placement=top><i class="icon icon-facebook"></i></a></li>
+        
+        <li><a href="../../../../atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2021 Nguyen Phuc Quoc
+        
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="../../../../js/plugin.min.js"></script>
+
+
+<script src="../../../../js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '../../../../content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="../../../../js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+<!-- custom analytics part create by xiamo -->
+<script defer src="https://cdn1.lncld.net/static/js/av-min-1.2.1.js"></script>
+<script defer>
+AV.init({
+  appId: 'qHYDMbRcHqbXbFml38lR3RbV-MdYXbMMI',
+  appKey: 'xR5PTTlW2um1jMrXazbRI7wd'
+});
+
+function showTime(Counter) {
+	var query = new AV.Query(Counter);
+		var visitors= $('.leancloud_visitors');
+		query.greaterThanOrEqualTo("time", 0);		
+		query.find({
+			success: function(results) {
+				if (results.length == 0) {				
+					return;
+				}
+				var data = results;
+				visitors.each(function(){
+					var url = $(this).attr('id').trim();					
+					for (var i = 0; i < data.length; i++) {
+						var object = data[i];
+						var content = object.get('time');
+						var _url = object.get('url')
+						if(url == _url){
+							$(this).text(content);
+						}
+					}
+				})
+				
+			},
+			error: function(object, error) {
+				console.log("Error: " + error.code + " " + error.message);
+			}
+		});
+}
+
+function addCount(Counter) {
+	var Counter = AV.Object.extend("Counter");
+	url = $(".leancloud_visitors").attr('id').trim();
+	title = $(".leancloud_visitors").attr('data-flag-title').trim();
+	var query = new AV.Query(Counter);
+	query.equalTo("url", url);
+	query.find({
+		success: function(results) {
+			if (results.length > 0) {
+				var counter = results[0];
+				counter.fetchWhenSave(true);
+				counter.increment("time");
+				counter.save(null, {
+					success: function(counter) {
+						var content = counter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(counter, error) {
+						console.log('Failed to save Visitor num, with error message: ' + error.message);
+					}
+				});
+			} else {
+				var newcounter = new Counter();
+				newcounter.set("title", title);
+				newcounter.set("url", url);
+				newcounter.set("time", 1);
+				newcounter.save(null, {
+					success: function(newcounter) {
+					    console.log("newcounter.get('time')="+newcounter.get('time'));
+						var content = newcounter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(newcounter, error) {
+						console.log('Failed to create');
+					}
+				});
+			}
+		},
+		error: function(error) {
+			console.log('Error:' + error.code + " " + error.message);
+		}
+	});
+}
+$(function() {
+	var Counter = AV.Object.extend("Counter");
+	if ($('.leancloud_visitors').length == 1) {
+		addCount(Counter);
+	} else {
+		showTime(Counter);
+	}
+}); 
+</script>
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: 'qHYDMbRcHqbXbFml38lR3RbV-MdYXbMMI',
+    appKey: 'xR5PTTlW2um1jMrXazbRI7wd',
+    placeholder: 'Comment here...',
+    avatar: 'mm',
+    meta: meta,
+    lang: 'en',
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+     
+
+
+
+
+
+
+
+</body>
+</html>

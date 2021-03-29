@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Blog&#39;s Quoc Ng</title>
+  
+  <subtitle>Quoc Ninja</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://phucquoc-ng.github.io/"/>
+  <updated>2021-03-29T06:52:16.609Z</updated>
+  <id>https://phucquoc-ng.github.io/</id>
+  
+  <author>
+    <name>Nguyen Phuc Quoc</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Flutter Isolate giải quyết được gì?</title>
+    <link href="https://phucquoc-ng.github.io/2021/03/29/flutter-isolate-la-gi/"/>
+    <id>https://phucquoc-ng.github.io/2021/03/29/flutter-isolate-la-gi/</id>
+    <published>2021-03-29T04:58:08.000Z</published>
+    <updated>2021-03-29T06:52:16.609Z</updated>
+    
+    <content type="html"><![CDATA[<p>Một ngày đẹpt trời bạn gặp 1 tasks bên dưới bạn sẽ giải quyết thế nào?</p><ul><li>Bạn đang có ý định call api và xử lí response khi server trả về kết quả, và response đó chứa hàng triệu bản ghi/giá trị, mà nếu làm theo cách thông thường sẽ làm cho UI của bạn bị treo</li><li>Bạn cần edit một ảnh trên app mà ảnh đó cực kì lớn, có thể gây treo hoặc lag app</li></ul><p>Đến đây bạn chắc đã biết có rất nhiều cách có thể giải quyết vấn đề trên đúng không?</p><p>Nhưng hum nay mình chỉ đề cập đến <strong>Flutter Isolate</strong> </p><p>Vậy <strong>Flutter Isolate</strong> là gì?</p><p>Để dễ hiểu hơn ta có thể thấy trong một số game FPS như Counter Strike, COD,… bạn có thể thấy cứ mỗi khi bạn bắn súng, sẽ có nhiều task cần được thực thi, ví dụ như phát tiếng súng nổ, thay đổi số lượng đạn còn lại, giảm máu của đối tượng bị trúng đạn,… Tất cả những task này được phân chia thành nhiều thread khác nhau, xử lí song song ở trong các <strong>isolate</strong> riêng biệt (isolate và thread có thể gọi thay cho nhau vì thực chất isolate là thứ mà Dart gọi để ám chỉ việc multi threading)</p><p>Những ngôn ngữ như JAVA hay C++ chia sẻ bộ nhớ <a href="https://docs.oracle.com/cd/E13150_01/jrockit_jvm/jrockit/geninfo/diagnos/garbage_collect.html">heap</a> của chúng với thread, nhưng với Flutter, tất cả các isolate đều có một bộ nhớ riêng biệt và hoạt động độc lập. Chính vì nó có bộ nhớ riêng nên chúng không cần phải <em>locking</em> giống như bên thread, vì vậy khi nó đã hoàn thành xong task, thì bộ nhớ đó sẽ tự động được giải phóng bằng <em>garbage collection</em>.</p><p><img src="/Users/mbp0031/QuocNg/phucquoc-ng.github.io/source/_images/dart_isolate.jpeg" alt="dart isolate"></p><p>Bất kể một chương trình Dart nào đều run trên một hoặc nhiều Isolate (chúng ta hay thường gọi là Dart Isolate). </p><p>Các thành phần cơ bản của <strong>Dart Isolate</strong>:</p><ul><li><strong>Heap:</strong> Nơi lưu trữ các object được cấp phát trong chương trình</li><li><strong>Mutator Thread:</strong> Thread này sẽ thực thi Dart code (viết trên C)</li><li><strong>Helper Thread:</strong> Một Isolate có thể có nhiều helper thread, công việc chính là xử lý những tác vụ bên trong Dart VM ví dụ như GC, JIT …</li></ul><p>💥 Vùng <strong>Heap</strong> của các <strong>Isolate</strong> không thể liên hệ với nhau</p><p>💥Giữa các <strong>Isolate</strong> không có sự chia sẻ về <strong>memory</strong> và để giao tiếp giữa chúng chúng ta phải sử dụng các <strong>message</strong> gửi vào các <strong>Ports</strong> sau đó lắng nghe tại các <strong>Ports</strong> đó để lấy data về.</p><blockquote><p>Để sử dụng những lợi ích nêu trên, Flutter đã để dành riêng cho mỗi isolate một bộ nhớ riêng, chính vì thế nên họ mới đặt tên nó là isolate (mang ý nghĩa <em>cô lập</em>, <em>độc lập</em> trong tiếng Việt)</p></blockquote><p>Vậy để tống kết lại, bạn sẽ cần đến isolate khi bạn nghĩ rằng task đó sẽ rất “nặng”, cần rất nhiều sự tính toán và tài nguyên cho nó, và bạn không muốn thực hiện nó trên UI thread vì nó sẽ ảnh hưởng đến UI của bạn.</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Một ngày đẹpt trời bạn gặp 1 tasks bên dưới bạn sẽ giải quyết thế nào?&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Bạn đang có ý định call api và xử lí response khi ser
+      
+    
+    </summary>
+    
+    
+    
+      <category term="flutter" scheme="https://phucquoc-ng.github.io/tags/flutter/"/>
+    
+      <category term="dart" scheme="https://phucquoc-ng.github.io/tags/dart/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Zero to Hero Dart</title>
+    <link href="https://phucquoc-ng.github.io/2021/03/29/basic-dart/"/>
+    <id>https://phucquoc-ng.github.io/2021/03/29/basic-dart/</id>
+    <published>2021-03-29T03:57:04.000Z</published>
+    <updated>2021-03-29T08:50:23.916Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Basics"><a href="#Basics" class="headerlink" title="Basics"></a>Basics</h3><ol><li><strong>Comments</strong></li><li><strong>Variables</strong></li><li><strong>Console Input</strong></li><li><strong>Static vs Dynamic Variables</strong></li><li><strong>Final &amp; Constant Variables</strong></li><li><strong>Data Types</strong></li><li><strong>Numbers</strong></li><li><strong>Boolean</strong></li><li><strong>Strings</strong></li><li><strong>Arithmetic Operators</strong></li><li><strong>Relational Operators</strong></li><li><strong>Type Test Operators</strong></li><li><strong>Assignment Operators</strong></li><li><strong>Logical Operators</strong></li><li><strong>Bitwise Operators</strong></li></ol><h3 id="Control-Flow"><a href="#Control-Flow" class="headerlink" title="Control Flow"></a>Control Flow</h3><ol><li><strong>Conditional Expressions</strong></li><li><strong>Conditional if Statement</strong></li><li><strong>Switch Statement</strong></li><li><strong>for Loop</strong></li><li><strong>for in Loop</strong></li><li><strong>while Loop</strong></li><li><strong>do while Loop</strong></li><li><strong>Break Statement</strong></li><li><strong>Continue Statement</strong></li><li><strong>Labels</strong></li></ol><h3 id="Functions"><a href="#Functions" class="headerlink" title="Functions"></a>Functions</h3><ol><li><strong>Function Parameters</strong></li><li><strong>Function Optional Positional Parameter</strong></li><li><strong>Function Optional Named Parameter</strong></li><li><strong>Function Optional Parameters with Default Values</strong></li><li><strong>Function Return Values</strong></li><li><strong>Function Recursion</strong></li><li><strong>Lambda Function</strong></li></ol><h3 id="Error-Exception-Handling"><a href="#Error-Exception-Handling" class="headerlink" title="Error/Exception Handling"></a>Error/Exception Handling</h3><ol><li><strong>Try Catch Block</strong></li><li><strong>Try On Block</strong></li><li><strong>Finally Block</strong></li><li><strong>Manually Throw An Exception</strong></li><li><strong>Custom Exception</strong></li></ol><h3 id="Collections"><a href="#Collections" class="headerlink" title="Collections"></a>Collections</h3><ol><li><strong>Lists</strong></li><li><strong>Maps</strong></li><li><strong>Set</strong></li><li><strong>HashMap</strong></li><li><strong>HashSet</strong></li><li><strong>Queue</strong></li><li><strong>Generics</strong></li><li><strong>Iterating Over Collections</strong></li></ol><h3 id="Classes-amp-Objects"><a href="#Classes-amp-Objects" class="headerlink" title="Classes &amp; Objects"></a>Classes &amp; Objects</h3><ol><li><strong>Constructor</strong></li><li><strong>Named Constructors</strong></li><li><strong>Custom Getters &amp; Setters</strong></li><li><strong>Inheritance</strong></li><li><strong>Method Overriding</strong></li><li><strong>Abstract Classes and Implements</strong></li><li><strong>Multiple Class Inheritance</strong></li><li><strong>this Keyword</strong></li><li><strong>Static Keyword</strong></li><li><strong>Super Keyword</strong></li><li><strong>Cascade Operator</strong></li></ol><h3 id="Extras"><a href="#Extras" class="headerlink" title="Extras"></a>Extras</h3><ol><li><p><strong>Runes</strong></p><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main()</span><br><span class="line">&#123;  </span><br><span class="line">  <span class="built_in">String</span> epicString = <span class="string">&quot;Hello World&quot;</span>;</span><br><span class="line">  <span class="built_in">print</span>(epicString.codeUnits);</span><br><span class="line">  <span class="built_in">print</span>(epicString.codeUnitAt(<span class="number">1</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>Bộ ký tự át-xơ-ki (ASCII)</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100]</span><br><span class="line">101</span><br></pre></td></tr></table></figure></li><li><p><strong>typedef</strong></p><p>Typedefs. Trong <strong>Dart</strong>, các hàm <strong>là</strong> các đối tượng, giống như các chuỗi và các số <strong>là</strong> các đối tượng. Một <strong>typedef</strong> , hoặc gọi <strong>là</strong> bí danh kiểu hàm, cung cấp cho một kiểu hàm một tên mà bạn có thể sử dụng khi khai báo các trường và các kiểu trả về. Một <strong>typedef</strong> giữ lại thông tin của kiểu khi một kiểu hàm được gán cho một biến.</p></li><li><p><strong>Concurrency</strong></p></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;Basics&quot;&gt;&lt;a href=&quot;#Basics&quot; class=&quot;headerlink&quot; title=&quot;Basics&quot;&gt;&lt;/a&gt;Basics&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Comments&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Varia
+      
+    
+    </summary>
+    
+    
+    
+      <category term="flutter" scheme="https://phucquoc-ng.github.io/tags/flutter/"/>
+    
+      <category term="dart" scheme="https://phucquoc-ng.github.io/tags/dart/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Ngẫm - Sự Nghiệp</title>
+    <link href="https://phucquoc-ng.github.io/2020/11/24/ngam-su-nghiep/"/>
+    <id>https://phucquoc-ng.github.io/2020/11/24/ngam-su-nghiep/</id>
+    <published>2020-11-24T04:07:44.000Z</published>
+    <updated>2021-03-27T02:36:05.780Z</updated>
+    
+    <content type="html"><![CDATA[<ol><li><p>Làm thuê là một chút việc của một người làm cho người khác. Kinh doanh là một người làm một chút việc nào đó. Sự nghiệp là việc mà một nhóm người cùng nhau làm cả đời cũng không hết. </p></li><li><p>Làm thuê là việc rất nhiều người đi làm để kiếm tiền cho người khác. Kinh doanh là việc kiếm tiền của một cá nhân. Sự nghiệp là việc của một nhóm người cùng nhau thực hiện một ước mơ to lớn nào đó, tiện thể dùng nó để kiếm một số tiền dùng cả đời không hết. </p></li><li><p>Làm thuê chỉ có thể kiếm được một số tiền lương nhất định để duy trì cuộc sống. Kinh doanh là việc nghề nào có thể kiếm ra tiền thì làm nghề đó. Sự nghiệp là công việc cho dù có kiếm được tiền hay không vẫn phải làm, khi kiếm được tiền cũng như khi bù lỗ đều phải bình tĩnh, vui vẻ, bởi đó là sự tích lũy về tài phú và kinh nghiệm. </p></li><li><p>Thân phận của người đi làm thuê thì mãi mãi không thay đổi, hoàn toàn dựa vào thực lực. Kinh doanh cũng như việc khai thác mỏ tạm thời, dùng bộ não để có thể chiếm được. Sự nghiệp là việc liên tục đi sâu nghiên cứu về một lĩnh vực, dụng tâm để kinh doanh. </p></li><li><p>Làm thuê là việc làm thế nào để được ông chủ coi trọng, vận mệnh của mình là do người khác quyết định. Kinh doanh chính là mang những gì tài hoa của mình ra cho mọi người biết. Sự nghiệp là dùng để theo đuổi và khắc phục vượt qua, mãi mãi chỉ là cạnh tranh với bản thân, so sánh với bản thân của ngày hôm qua. </p></li><li><p>Làm thuê là phải đợi lương từng ngày, từng ngày. Kinh doanh là việc phải theo dõi thu nhập đầu vào từng ngày, từng ngày. Sự nghiệp là việc sáng tạo giá trị kinh tế từng ngày, từng ngày. </p></li><li><p>Làm thuê là việc đi làm giúp người khác mà không có một chút động lực cá nhân. Kinh doanh là hưng phấn tạm thời của một cá nhân. Sự nghiệp là hạnh phúc kéo dài liên tục của một nhóm người. </p></li><li><p>Làm thuê lấy thời gian làm trung tâm, chẳng hạn như quan tâm tới giờ vào làm và kết thúc. Kinh doanh lấy lợi nhuận làm trung tâm và chỉ có lợi nhuận là duy nhất. Sự nghiệp là sự tồn tại dựa trên việc chăm lo giúp đỡ đáp ứng nhu cầu cần thiết của con người, lấy con người làm cơ bản.</p></li><li><p>Làm thuê chỉ cần một điều là kỹ năng. Kinh doanh chủ yếu cần phương pháp và kinh nghiệm. Sự nghiệp ngược lại cần nâng cao tâm tính và cảnh giới của con người. </p></li><li><p>Người làm thuê nhìn mặt ông chủ để thay đổi lời nói. Người làm kinh doanh dùng mắt, dùng tâm để nói. Sự nghiệp là thực hiện ước mơ, dùng tâm để nói. </p></li><li><p>Làm thuê là việc dùng thời gian để đổi lấy tiền. Kinh doanh là việc dùng thời gian và sức khỏe để đổi lấy tiền. Sự nghiệp là việc dùng thời gian ngắn nhất để xây dựng cơ nghiệp, và từ cơ nghiệp đó tạo ra thu nhập. </p></li><li><p>Sau khi người làm thuê về hưu thì kết thúc không còn gì nữa, bởi khi đó sức khỏe, thu nhập, danh lợi đều đã bị thu hẹp. Sau khi người làm kinh doanh về hưu là dùng tiền để mua lại sức khỏe của mình. Người có sự nghiệp sau khi nghỉ hưu thì càng có kinh nghiệm và có thể tích lũy nhiều giá trị hơn, bởi họ chính là người sáng tạo ra nó.</p></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Làm thuê là một chút việc của một người làm cho người khác. Kinh doanh là một người làm một chút việc nào đó. Sự nghiệp là việc 
+      
+    
+    </summary>
+    
+    
+    
+      <category term="ngam" scheme="https://phucquoc-ng.github.io/tags/ngam/"/>
+    
+      <category term="thinking" scheme="https://phucquoc-ng.github.io/tags/thinking/"/>
+    
+      <category term="su-nghiep" scheme="https://phucquoc-ng.github.io/tags/su-nghiep/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Extensions VSCode for Flutter</title>
+    <link href="https://phucquoc-ng.github.io/2020/11/02/extensions-vs-code-for-flutter/"/>
+    <id>https://phucquoc-ng.github.io/2020/11/02/extensions-vs-code-for-flutter/</id>
+    <published>2020-11-02T02:43:02.000Z</published>
+    <updated>2021-03-27T02:36:05.780Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Extensions"><a href="#Extensions" class="headerlink" title="Extensions"></a>Extensions</h3><ol><li><p><a href="https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter">Flutter</a> and <a href="https://marketplace.visualstudio.com/items?itemName=Dart-Code.dart-code">Dart</a></p></li><li><p><a href="https://marketplace.visualstudio.com/items?itemName=Nash.awesome-flutter-snippets">Awesome Flutter Snippets</a></p></li><li><p><a href="https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer-2">Bracket Pair Colorizer 2</a></p></li><li><p><a href="https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme">Material Icon Theme</a></p></li><li><p><a href="https://marketplace.visualstudio.com/items?itemName=jeroen-meijer.pubspec-assist">Pubspec Assist</a></p></li><li><p><a href="https://marketplace.visualstudio.com/items?itemName=FelixAngelov.bloc">Bloc-Felix Angelov</a></p></li><li><p><a href="https://marketplace.visualstudio.com/items?itemName=BendixMa.dart-data-class-generator">Dart Data Class Generator</a></p></li></ol><hr><h3 id="Shortcuts"><a href="#Shortcuts" class="headerlink" title="Shortcuts"></a>Shortcuts</h3><p><strong>Format</strong>: <code>Alt + Shift + F</code> or <code>Option + Shift + F</code></p><p><strong>Quick Fix</strong>: <code>Ctrl + .</code> or <code>Cmd + .</code></p><p><strong>Command Palette</strong>: <code>Ctrl + Shift + P</code> or <code>Cmd + Shift + P</code></p><p><strong>Quick Open</strong>: <code>Ctrl + P</code> or <code>Cmd + P</code></p><p><strong>Move Line(s)</strong>: <code>Alt + Up/Down</code> or <code>Option + Up/Down</code></p><p><strong>Add Selection to Next Find Match</strong>: <code>Crtl + D</code> or <code>Cmd + D</code><br><strong>Rename</strong>: <code>F2</code><br><strong>Go to Definition</strong>: <code>Ctrl + Click</code> or <code>Cmd + Click</code></p><p><strong>Remove Unused Imports</strong>: <code>Alt + Shift + O</code> or <code>Cmd + Shift + O</code><br><strong>Toggle Comment</strong>: <code>Ctrl + /</code> or <code>Cmd + /</code></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;Extensions&quot;&gt;&lt;a href=&quot;#Extensions&quot; class=&quot;headerlink&quot; title=&quot;Extensions&quot;&gt;&lt;/a&gt;Extensions&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;https://marketplace.
+      
+    
+    </summary>
+    
+    
+    
+      <category term="Extensions" scheme="https://phucquoc-ng.github.io/tags/Extensions/"/>
+    
+      <category term="Flutter" scheme="https://phucquoc-ng.github.io/tags/Flutter/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Giới thiệu về Flutter</title>
+    <link href="https://phucquoc-ng.github.io/2020/10/12/intro-flutter/"/>
+    <id>https://phucquoc-ng.github.io/2020/10/12/intro-flutter/</id>
+    <published>2020-10-12T07:46:13.000Z</published>
+    <updated>2021-03-29T06:46:01.180Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>Flutter</strong> được phát triển nhằm giải quyết bài toán thường gặp trong mobile là <strong>Fast Development</strong> và <strong>Native Performance</strong>. Nếu như React Native chỉ đảm bảo <strong>FD</strong> và code native thuần chỉ đảm bảo <strong>NP</strong> thì <strong>Flutter</strong> làm được cả 2 điều trên. Magic !!! hay <strong>hư cấu</strong> </p><p><strong>Flutter</strong> sử dụng <strong>DART</strong>. Một ngôn ngữ lập trình hướng đối tượng do Google phát triển. <strong>DART</strong> là một static type language nên nó là <strong>AOT</strong> (Ahead of Time), compile xong hết rồi mới chạy. Trong khi đó nó cũng là <strong>JIT</strong> (Just in Time) giống như các dynamic type language. Khi dev thì nó sử dụng  <strong>JIT</strong> để hỗ trợ Hot Load và build release thì dùng AOT để tối ưu hiệu năng như một native code bình thường. Lại magic nữa !!!</p><p>Theo doc của Flutter Engine, có tới 4 threads (runners) được sử dụng trong app: <strong>Platform Task Runne</strong>r, <strong>UI Task Runner</strong>, <strong>GPU Task Runner</strong> và <strong>IO Task Runner</strong>. Các threads này độc lập và không share memory với nhau, chúng giao tiếp với nhau thông qua channels… tới đây ai fan golang sẽ hiểu và rất thích pattern này.</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;strong&gt;Flutter&lt;/strong&gt; được phát triển nhằm giải quyết bài toán thường gặp trong mobile là &lt;strong&gt;Fast Development&lt;/strong&gt; và &lt;strong
+      
+    
+    </summary>
+    
+    
+    
+      <category term="flutter" scheme="https://phucquoc-ng.github.io/tags/flutter/"/>
+    
+      <category term="dart" scheme="https://phucquoc-ng.github.io/tags/dart/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Widges Flutter</title>
+    <link href="https://phucquoc-ng.github.io/2020/10/09/widgets-flutter/"/>
+    <id>https://phucquoc-ng.github.io/2020/10/09/widgets-flutter/</id>
+    <published>2020-10-09T04:33:55.000Z</published>
+    <updated>2021-03-27T02:36:05.781Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Widgets-la-gi"><a href="#Widgets-la-gi" class="headerlink" title="Widgets là gì?"></a>Widgets là gì?</h3><p><strong>Widget</strong> có thể coi như 1 khối <strong>LEGO</strong> </p><h5 id="De-de-hoc-hon-thi-minh-phan-chia-ra-thanh-5-nhom-chu-dao-nhu-sau"><a href="#De-de-hoc-hon-thi-minh-phan-chia-ra-thanh-5-nhom-chu-dao-nhu-sau" class="headerlink" title="Để dễ học hơn thì mình phân chia ra thành 5 nhóm chủ đạo như sau:"></a>Để dễ học hơn thì mình phân chia ra thành 5 nhóm chủ đạo như sau:</h5><p>Nhóm <strong>Value Widgets:</strong> Nó dùng để hiển thị 1 dữ liệu gì đấy, dữ liệu có thể từ local, internet hoặc dữ liệu do user nhập vào. Một vài widget tiêu biểu như: Text, TextField, Icon, Image, FlatButton,…</p><p>Nhóm <strong>Layout Widgets:</strong> Nó dùng để bố trí và căn chỉnh các Value Widget trên trong 1 layout. Ví dụ: Row (bố trí các widget theo hàng ngang), Column (bố trí các widget theo hàng dọc), Align, Center (căn chỉnh layout), …</p><p>Nhóm <strong>Animation Widgets:</strong> Nó giúp tạo ra Animation cho app của bạn thêm đẹp. VD: FadeInImage, Hero, SlideTransition, AnimatedContainer, …</p><p>Nhóm <strong>Navigation Widgets:</strong> những widget giúp điều hướng trong app như: BottomNavigationBar, TabBar, AlertDialog,…</p><p>Nhóm <strong>Interaction Widgets:</strong> Nhóm này giúp chúng ta tạo ra những sự tương tác với View như: Dismissible, Draggable, GestureDetector, …</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;Widgets-la-gi&quot;&gt;&lt;a href=&quot;#Widgets-la-gi&quot; class=&quot;headerlink&quot; title=&quot;Widgets là gì?&quot;&gt;&lt;/a&gt;Widgets là gì?&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;Widget&lt;/strong&gt; 
+      
+    
+    </summary>
+    
+    
+    
+      <category term="flutter" scheme="https://phucquoc-ng.github.io/tags/flutter/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Roadmap to learn Flutter</title>
+    <link href="https://phucquoc-ng.github.io/2020/10/09/roadmap-learning-flutter/"/>
+    <id>https://phucquoc-ng.github.io/2020/10/09/roadmap-learning-flutter/</id>
+    <published>2020-10-09T04:18:33.000Z</published>
+    <updated>2021-03-27T02:36:05.781Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+    
+      <category term="flutter" scheme="https://phucquoc-ng.github.io/tags/flutter/"/>
+    
+      <category term="roadmap" scheme="https://phucquoc-ng.github.io/tags/roadmap/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Review Khoá Học - Kubernetes for the absolute beginners - Mumshad Mannambeth</title>
+    <link href="https://phucquoc-ng.github.io/2020/09/16/review-course-kubernetes-for-the-absolute-beginners/"/>
+    <id>https://phucquoc-ng.github.io/2020/09/16/review-course-kubernetes-for-the-absolute-beginners/</id>
+    <published>2020-09-16T03:18:43.000Z</published>
+    <updated>2021-03-27T02:36:05.780Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Review-Khoa-Hoc-Kubernetes-for-the-absolute-beginners-Mumshad-Mannambeth-udemy"><a href="#Review-Khoa-Hoc-Kubernetes-for-the-absolute-beginners-Mumshad-Mannambeth-udemy" class="headerlink" title="[Review Khoá Học] Kubernetes for the absolute beginners - Mumshad Mannambeth (udemy)"></a>[Review Khoá Học] Kubernetes for the absolute beginners - Mumshad Mannambeth (udemy)</h3><h4 id="Ban-se-hoc-duoc-nhung-kien-thuc-ben-duoi"><a href="#Ban-se-hoc-duoc-nhung-kien-thuc-ben-duoi" class="headerlink" title="Bạn sẽ học được những kiến thức bên dưới:"></a>Bạn sẽ học được những kiến thức bên dưới:</h4><ol><li><p>*<em>Kubernetes Overview *</em></p></li><li><p><strong>Containers – Docker</strong></p></li><li><p><strong>Container Orchestration?</strong></p></li><li><p><strong>Demo - Setup Kubernetes</strong></p></li><li><p><strong>Kubernetes Concepts – PODs | ReplicaSets | Deployment | Services</strong></p></li><li><p><strong>Networking in Kubernetes</strong></p></li><li><p><strong>Kubernetes Management - Kubectl</strong></p></li><li><p><strong>Kubernetes Definition Files - YAML</strong></p></li><li><p><strong>Kubernetes on Cloud – AWS/GCP</strong></p></li></ol><h4 id="Kubernetes"><a href="#Kubernetes" class="headerlink" title="Kubernetes"></a>Kubernetes</h4><p>Để hiểu rõ <strong>Kubernetes</strong> là gì? Bắt buộc ta cần phải hiểu rõ 2 khái niệm <strong>Container</strong> và <strong>Orchestration</strong></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;Review-Khoa-Hoc-Kubernetes-for-the-absolute-beginners-Mumshad-Mannambeth-udemy&quot;&gt;&lt;a href=&quot;#Review-Khoa-Hoc-Kubernetes-for-the-absolut
+      
+    
+    </summary>
+    
+    
+    
+      <category term="kubernetes" scheme="https://phucquoc-ng.github.io/tags/kubernetes/"/>
+    
+      <category term="docker" scheme="https://phucquoc-ng.github.io/tags/docker/"/>
+    
+      <category term="review course" scheme="https://phucquoc-ng.github.io/tags/review-course/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Những bài viết thực hành hay nhất về K8s</title>
+    <link href="https://phucquoc-ng.github.io/2020/07/21/best-practice-with-k8s/"/>
+    <id>https://phucquoc-ng.github.io/2020/07/21/best-practice-with-k8s/</id>
+    <published>2020-07-21T07:24:38.000Z</published>
+    <updated>2021-03-27T02:36:05.780Z</updated>
+    
+    <content type="html"><![CDATA[<ol><li><a href="https://rinormaloku.com/introduction-application-architecture/">Demo + Tìm hiểu về K8s</a></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;https://rinormaloku.com/introduction-application-architecture/&quot;&gt;Demo + Tìm hiểu về K8s&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+      
+    
+    </summary>
+    
+    
+    
+      <category term="K8s" scheme="https://phucquoc-ng.github.io/tags/K8s/"/>
+    
+      <category term="microservices" scheme="https://phucquoc-ng.github.io/tags/microservices/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Container là gì?</title>
+    <link href="https://phucquoc-ng.github.io/2020/07/10/what-is-container/"/>
+    <id>https://phucquoc-ng.github.io/2020/07/10/what-is-container/</id>
+    <published>2020-07-10T03:00:15.000Z</published>
+    <updated>2021-03-27T02:36:05.781Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://blogd.net/docker/container-la-gi/">Container là gì?</a></p><h2 id="Thuat-ngu-container"><a href="#Thuat-ngu-container" class="headerlink" title="Thuật ngữ container"></a>Thuật ngữ container</h2><h4 id="Container"><a href="#Container" class="headerlink" title="Container:"></a>Container:</h4><p>Trong Linux, container là công nghệ ảo hóa hệ điều hành được dùng để gộp applications và các phụ thuộc thành một gói và chạy chúng trong môi trường cô lập. </p><h4 id="Container-Image"><a href="#Container-Image" class="headerlink" title="Container Image:"></a>Container Image:</h4><p>Container images là tệp tĩnh xác định hệ thống tệp và hành vi của các cấu hình container cụ thể. Container images được dùng làm mẫu để tạo containers.</p><h4 id="Container-Orchestration"><a href="#Container-Orchestration" class="headerlink" title="Container Orchestration:"></a>Container Orchestration:</h4><p>Orchestration là thuật ngữ được sử dụng để mô tả các quy trình và công cụ cần thiết để quản lý lượng lớn container trên nhiều máy chủ. Container orchestration thường kiểm soát tỷ lệ, khả năng chịu lỗi, phân bổ tài nguyên và lập lịch sử dụng nền tảng container. </p><h4 id="Container-Runtime"><a href="#Container-Runtime" class="headerlink" title="Container Runtime:"></a>Container Runtime:</h4><p><strong>Container runtime</strong> là thành phần thực sự chạy và quản lý container trên máy chủ. Yêu cầu tối thiểu thường là cung cấp container từ một image nhất định, nhưng nhiều runtimes gộp các chức năng khác như quản lý quy trình, giám sát và quản lý image. Docker bao gồm container runtime trong lệnh docker[/B] của nó, nhưng có nhiều lựa chọn thay thế khác có sẵn cho các trường hợp sử dụng khác nhau. </p><h4 id="Linux-cgroups"><a href="#Linux-cgroups" class="headerlink" title="Linux cgroups:"></a>Linux cgroups:</h4><p><strong>Linux cgroups</strong>, hoặc các nhóm kiểm soát, là tính năng kernel kết hợp các quy trình lại với nhau và xác định quyền truy cập của chúng vào tài nguyên.Container trong Linux được triển khai bằng cgroups để quản lý tài nguyên và các quy trình riêng biệt.</p><h4 id="Linux-namespaces"><a href="#Linux-namespaces" class="headerlink" title="Linux namespaces:"></a>Linux namespaces:</h4><p><strong>Linux namespaces</strong> là tính năng kernel được thiết kế để giới hạn khả năng hiển thị cho một quá trình hoặc cgroup đối với phần còn lại của hệ thống. container trong Linux sử dụng namespaces để giúp cô lập workloads và tài nguyên của chúng khỏi các tiến trình khác đang chạy trên hệ thống.</p><h4 id="LXC"><a href="#LXC" class="headerlink" title="LXC:"></a>LXC:</h4><p>LXC là hình thức container hóa Linux có trước Docker và nhiều công nghệ khác trong khi dựa vào nhiều công nghệ kernel tương tự. So với Docker, LXC thường ảo hóa toàn bộ hệ điều hành thay vì chỉ các quy trình cần thiết để chạy application, và có vẻ giống với máy ảo hơn.</p><h4 id="Virtual-Machines-May-ao"><a href="#Virtual-Machines-May-ao" class="headerlink" title="Virtual Machines (Máy ảo):"></a>Virtual Machines (Máy ảo):</h4><p>Máy ảo hay VM là công nghệ ảo hóa hardware mô phỏng toàn bộ máy tính. Một hệ điều hành đầy đủ được cài đặt trong máy ảo để quản lý các thành phần bên trong và truy cập tài nguyên computing của máy ảo.</p><h4 id="Virtualization-Ao-hoa"><a href="#Virtualization-Ao-hoa" class="headerlink" title="Virtualization (Ảo hóa):"></a>Virtualization (Ảo hóa):</h4><p> Ảo hóa là quá trình tạo, chạy và quản lý môi trường ảo hoặc tài nguyên máy tính. Ảo hóa là cách trừu tượng hóa tài nguyên vật lý và thường được dùng để phân đoạn một nhóm tài nguyên cho các mục đích khác nhau.</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;a href=&quot;https://blogd.net/docker/container-la-gi/&quot;&gt;Container là gì?&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;Thuat-ngu-container&quot;&gt;&lt;a href=&quot;#Thuat-ngu-container&quot; 
+      
+    
+    </summary>
+    
+    
+    
+      <category term="docker" scheme="https://phucquoc-ng.github.io/tags/docker/"/>
+    
+      <category term="container" scheme="https://phucquoc-ng.github.io/tags/container/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Kubernetes giải quyết được vấn đề gì?</title>
+    <link href="https://phucquoc-ng.github.io/2020/07/09/resolve-problem-with-kubernetes/"/>
+    <id>https://phucquoc-ng.github.io/2020/07/09/resolve-problem-with-kubernetes/</id>
+    <published>2020-07-09T03:56:51.000Z</published>
+    <updated>2021-03-27T02:36:05.780Z</updated>
+    
+    <content type="html"><![CDATA[<p>Vấn đề hiện nay:</p><blockquote><p>Vấn đề đặt ra, cả ngàn docker container thì có thằng lúc chạy lúc không, lúc overload lúc underload, ai quản lý đống container này.</p></blockquote><p>Tưởng tượng, 1 ngày nào đó cái app của ta được xây dựng xong, đi vào hoạt động, trở nên lớn mạnh và có tới hàng triệu người dùng. Vậy thì khi đó, làm sao để ta xử lý được 1 cái hệ thống với hàng triệu request trong 1 phút như thế? Làm sao để xây dựng 1 cái app có thể dễ dàng scale được ?</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Vấn đề hiện nay:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Vấn đề đặt ra, cả ngàn docker container thì có thằng lúc chạy lúc không, lúc overload lúc underload,
+      
+    
+    </summary>
+    
+    
+    
+      <category term="kubernetes" scheme="https://phucquoc-ng.github.io/tags/kubernetes/"/>
+    
+      <category term="docker" scheme="https://phucquoc-ng.github.io/tags/docker/"/>
+    
+  </entry>
+  
+</feed>
